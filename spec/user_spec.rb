@@ -3,6 +3,13 @@ require 'spec_helper'
 describe User do
   user = User.find_user(35_914)
 
+  describe '.find_user' do
+    it 'should find the item matching the item id from database' do
+      expected = User.new(35_914, 'VICTOR O')
+      expect(User.find_user(35_914)).to eq(expected)
+    end
+  end
+
   describe '#remove_purchased_item' do
     items = [
       Item.find_item(1_253),

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Item do
   describe '.find_item' do
-    it 'should the item matching the item id' do
+    it 'should find the item matching the item id from database' do
       expected = Item.new(1_298, 'Throttle Cable')
       expect(Item.find_item(1_298)).to eq(expected)
     end

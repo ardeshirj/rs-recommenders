@@ -27,6 +27,10 @@ class User
     User.new(row[0].to_i, row[1])
   end
 
+  def ==(other)
+    @id == other.id
+  end
+
   private
 
   def find_purchased_items
