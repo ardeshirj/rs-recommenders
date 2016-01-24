@@ -36,6 +36,12 @@ class Item
     end
   end
 
+  def self.remove_purchased_item(items, purchased_items)
+    items.delete_if do |item|
+      purchased_items.include?(item)
+    end
+  end
+
   def ==(other)
     @id == other.id
   end

@@ -16,12 +16,6 @@ class User
     @purchased_items = find_purchased_items unless @id.nil?
   end
 
-  def remove_purchased_item(items)
-    purchased_items.delete_if do |item|
-      items.include?(item)
-    end
-  end
-
   def self.find_user(user_id)
     row = DB.find_user(user_id)
     User.new(row[0].to_i, row[1])
