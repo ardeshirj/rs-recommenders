@@ -1,4 +1,5 @@
 require_relative './db.rb'
+require_relative './item.rb'
 
 # User information including purchase history
 class User
@@ -13,6 +14,12 @@ class User
     @id = id
     @name = name
     @purchased_items = find_purchased_items unless @id.nil?
+  end
+
+  def remove_purchased_item(items)
+    items.delete_if do |item|
+      purchased_items.include?(item)
+    end
   end
 
   def self.find_user(id)

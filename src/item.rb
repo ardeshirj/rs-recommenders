@@ -1,12 +1,13 @@
 require_relative './db.rb'
+require_relative './category.rb'
 
-# Purchaseable object
+# Purchasable object
 class Item
   extend DB
 
   attr_accessor :id, :name
 
-  # Many-to-many relationshiop with Category class.
+  # Many-to-many relationship with Category class.
   # categories: [Category1, Category2, CategoryN]
   attr_reader :categories
 
@@ -28,6 +29,19 @@ class Item
     db_items.map do |row|
       Item.new(row[0].to_i, row[1])
     end
+  end
+
+  def ==(other)
+    @id == other.id
+  end
+
+  # Refer to the same hash key
+  def eql?(other)
+    @id == other.id
+  end
+
+  def hash
+    @id.hash
   end
 
   private

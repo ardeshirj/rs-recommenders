@@ -7,5 +7,9 @@ class SimilarUsers
   end
 
   def find_similar_items
+    # Get the user purchased items
+    # Get all other users purchased items
+    # Find the users where they bought the same items as the other user
+    # Recommend what else they bought
   end
 end
