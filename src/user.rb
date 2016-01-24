@@ -17,13 +17,13 @@ class User
   end
 
   def remove_purchased_item(items)
-    items.delete_if do |item|
-      purchased_items.include?(item)
+    purchased_items.delete_if do |item|
+      items.include?(item)
     end
   end
 
-  def self.find_user(id)
-    row = DB.find_user(id)
+  def self.find_user(user_id)
+    row = DB.find_user(user_id)
     User.new(row[0].to_i, row[1])
   end
 
