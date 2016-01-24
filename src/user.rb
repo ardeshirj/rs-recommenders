@@ -1,16 +1,16 @@
+require_relative './db.rb'
+
 # User information including purchase history
 class User
   attr_accessor :id, :name
 
   # Many-to-many relationshiop with Item class.
-  attr_accessor :purchased_items
+  # purchased_items: [Item1, Item2, ItemN]
+  attr_reader :purchased_items
 
-  # Arg-1: Fixnum/Bignum
-  # Arg-2: String
-  # Arg-3: Hash { Item => Category }
-  def initialize(id, name, purchased_items)
+  def initialize(id, name)
     @id = id
     @name = name
-    @purchased_items = purchased_items
+    @purchased_items = []
   end
 end
