@@ -17,15 +17,20 @@ class Item
     @categories = find_categories unless @id.nil?
   end
 
-  def self.find_purchased_items(user_id)
-    db_items = DB.user_purchased_items(user_id)
+  def self.find_item(item_id)
+    row = DB.find_item(item_id)
+    Item.new(row[0].to_i, row[1])
+  end
+
+  def self.find_all_items
+    db_items = DB.all_items
     db_items.map do |row|
       Item.new(row[0].to_i, row[1])
     end
   end
 
-  def self.find_all_items
-    db_items = DB.all_items
+  def self.find_purchased_items(user_id)
+    db_items = DB.user_purchased_items(user_id)
     db_items.map do |row|
       Item.new(row[0].to_i, row[1])
     end
@@ -36,13 +41,13 @@ class Item
   end
 
   # Refer to the same hash key
-  def eql?(other)
-    @id == other.id
-  end
-
-  def hash
-    @id.hash
-  end
+  # def eql?(other)
+  #   @id == other.id
+  # end
+  #
+  # def hash
+  #   @id.hash
+  # end
 
   private
 
