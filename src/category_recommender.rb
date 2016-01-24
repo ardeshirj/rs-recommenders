@@ -13,17 +13,25 @@ class CategoryRecommender
   end
 
   def recommend_items
-    inventory = Item.find_all_items
-    top_categories = Category.purchased_category(@user.purchased_items)
+    categories = Category.purchased_category(@user.purchased_items)
 
-    found_items = []
-    inventory.each do |item|
-      item.categories.each do |category|
-        found_items << item if top_categories.include?(category.id)
+    candidate_items = Hash.new(0)
+    Item.find_all_items.each do |item|
+      categories_hit = (categories & item.categories).count
+      if (categories_hit > candidate_items[item]) && categories_hit != 0
+        candidate_items[item] = categories_hit
       end
     end
 
-    found_items.uniq!
-    @user.remove_purchased_item(found_items)
+    top_items = find_top_items(candidate_items)
+    Item.remove_purchased_item(top_items, @user.purchased_items)
+  end
+
+  private
+
+  def find_top_items(candidate_items)
+    candidate_items.sort_by do |_item_id, categories_hit|
+      categories_hit
+    end.reverse.to_h.keys
   end
 end

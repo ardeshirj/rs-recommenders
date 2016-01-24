@@ -52,4 +52,30 @@ module DB
   ensure
     db.close
   end
+
+  # rubocop:disable MethodLength
+  def self.category_recommender_validate(user_id)
+    db = SQLite3::Database.open DB_PATH
+    db.execute("SELECT ic.item_id, COUNT(ic.category_id)
+      FROM item i, item_category ic
+      WHERE i.item_id = ic.item_id
+      AND ic.category_id IN (
+        SELECT DISTINCT(ic.category_id) AS distinct_categories
+        FROM item_user iu, item i, item_category ic
+        WHERE iu.item_id = i.item_id
+        AND i.item_id = ic.item_id
+        AND iu.user_id = #{user_id}
+      )
+      AND ic.item_id NOT IN (
+        SELECT DISTINCT(item_id) AS distinct_purchased_item
+        FROM item_user iu
+        WHERE user_id = #{user_id}
+      )
+      GROUP BY ic.item_id
+      ORDER BY 2 DESC")
+  rescue SQLite3::Exception => e
+    puts e
+  ensure
+    db.close
+  end
 end

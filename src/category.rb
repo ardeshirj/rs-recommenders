@@ -8,14 +8,24 @@ class Category
   end
 
   def self.purchased_category(purchased_items)
-    categories_hits = Hash.new(0)
-    purchased_items.each do |item|
-      item.categories.each do |category|
-        categories_hits[category.id] += 1
+    categories = []
+    purchased_items.each do |purchased_item|
+      purchased_item.categories.each do |category|
+        categories << category
       end
     end
-    categories_hits.sort_by do |_category_id, hits|
-      hits
-    end.reverse.to_h.keys
+    categories.uniq!(&:id)
+  end
+
+  def ==(other)
+    @id == other.id
+  end
+
+  def eql?(other)
+    @id == other.id
+  end
+
+  def hash
+    @id.hash
   end
 end
