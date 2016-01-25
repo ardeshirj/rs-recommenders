@@ -46,14 +46,13 @@ class Item
     @id == other.id
   end
 
-  # Refer to the same hash key
-  # def eql?(other)
-  #   @id == other.id
-  # end
-  #
-  # def hash
-  #   @id.hash
-  # end
+  def eql?(other)
+    @id == other.id
+  end
+
+  def hash
+    @id.hash
+  end
 
   private
 
