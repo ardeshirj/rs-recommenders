@@ -9,16 +9,15 @@ class SimilarUsers
   extend DB
   attr_accessor :user
 
-  def initialize(user)
+  def initialize(user, similar_users)
     @user = user
+    @similar_users = similar_users
   end
 
-  def find_similar_items
+  def recommend_items
     recommend_items = Set.new
-    item_ids = @user.purchased_items.map(&:id)
-    similar_users = User.similar_purchase_users(item_ids)
 
-    similar_users.each do |user|
+    @similar_users.each do |user|
       found_items = user.purchased_items - @user.purchased_items
       unless found_items.empty?
         found_items.each { |found_item| recommend_items << found_item }
