@@ -15,6 +15,7 @@ class Category
       end
     end
     categories.uniq!(&:id)
+    categories
   end
 
   def ==(other)
