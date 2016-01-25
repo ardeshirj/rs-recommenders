@@ -21,8 +21,24 @@ class User
     User.new(row[0].to_i, row[1])
   end
 
+  def self.similar_purchase_users(item_id)
+    db_items = DB.find_similar_purchase_users(item_id)
+    db_items.map do |row|
+      User.new(row[0].to_i, row[1])
+    end
+  end
+
   def ==(other)
     @id == other.id
+  end
+
+  # Refer to the same hash key
+  def eql?(other)
+    @id == other.id
+  end
+
+  def hash
+    @id.hash
   end
 
   private

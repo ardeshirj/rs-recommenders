@@ -22,6 +22,18 @@ module DB
     db.close
   end
 
+  def self.find_similar_purchase_users(item_ids)
+    db = SQLite3::Database.open DB_PATH
+    db.execute("SELECT DISTINCT(u.user_id), u.name
+      FROM item_user iu, user u
+      WHERE iu.user_id = u.user_id
+      AND iu.item_id IN (#{item_ids.join(', ')})")
+  rescue SQLite3::Exception => e
+    puts e
+  ensure
+    db.close
+  end
+
   def self.all_items
     db = SQLite3::Database.open DB_PATH
     db.execute('SELECT * from item')
