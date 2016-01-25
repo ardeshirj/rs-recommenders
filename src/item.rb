@@ -11,7 +11,7 @@ class Item
   def initialize(id, name)
     @id = id
     @name = name
-    @categories = find_categories unless @id.nil?
+    @categories = pull_categories unless @id.nil?
   end
 
   def self.find_item(item_id)
@@ -53,7 +53,7 @@ class Item
 
   private
 
-  def find_categories
+  def pull_categories
     item_categories = []
     DB.item_categories(@id).each do |row|
       item_categories << Category.new(row[0].to_i, row[1])
