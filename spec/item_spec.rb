@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Item do
+  before :all do
+    @item = Item.find_item(1_253)
+  end
+
   describe '.find_item' do
     it 'should find the item matching the item id from database' do
       expected = Item.new(1_298, 'Throttle Cable')
@@ -42,6 +46,16 @@ describe Item do
       expect(
         Item.remove_purchased_item(items, user.purchased_items)
       ).to eq(expected)
+    end
+  end
+
+  describe '#pull_categories' do
+    it 'should return the item categories' do
+      expected = [
+        Category.new(134, 'Bicycle Engine Kits'),
+        Category.new(152, 'Gas Engine Kits')
+      ]
+      expect(@item.send(:pull_categories)).to eq(expected)
     end
   end
 end
