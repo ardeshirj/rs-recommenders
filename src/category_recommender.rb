@@ -8,15 +8,16 @@ class CategoryRecommender
   extend DB
   attr_accessor :user
 
-  def initialize(user)
+  def initialize(user, inventory)
     @user = user
+    @inventory = inventory
   end
 
   def recommend_items
     categories = Category.purchased_category(@user.purchased_items)
 
     candidate_items = Hash.new(0)
-    Item.find_all_items.each do |item|
+    @inventory.each do |item|
       categories_hit = (categories & item.categories).count
       if (categories_hit > candidate_items[item]) && categories_hit != 0
         candidate_items[item] = categories_hit
