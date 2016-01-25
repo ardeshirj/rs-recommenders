@@ -31,14 +31,6 @@ class User
     @id == other.id
   end
 
-  def eql?(other)
-    @id == other.id
-  end
-
-  def hash
-    @id.hash
-  end
-
   private
 
   def pull_purchased_items
