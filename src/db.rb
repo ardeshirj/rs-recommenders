@@ -36,7 +36,7 @@ module DB
 
   def self.all_items
     db = SQLite3::Database.open DB_PATH
-    db.execute('SELECT * from item')
+    db.execute('SELECT * FROM item')
   rescue SQLite3::Exception => e
     puts e
   ensure
@@ -47,7 +47,8 @@ module DB
     db = SQLite3::Database.open DB_PATH
     db.execute("SELECT i.item_id, i.name
       FROM item_user iu, item i
-      WHERE iu.item_id = i.item_id AND iu.user_id = #{user_id}")
+      WHERE iu.item_id = i.item_id
+      AND iu.user_id = #{user_id}")
   rescue SQLite3::Exception => e
     puts e
   ensure
@@ -58,7 +59,8 @@ module DB
     db = SQLite3::Database.open DB_PATH
     db.execute("SELECT c.category_id, c.name
       FROM item_category ic, category c
-      WHERE ic.category_id = c.category_id AND ic.item_id = #{item_id}")
+      WHERE ic.category_id = c.category_id
+      AND ic.item_id = #{item_id}")
   rescue SQLite3::Exception => e
     puts e
   ensure
