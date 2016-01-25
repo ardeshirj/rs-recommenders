@@ -20,8 +20,7 @@ when 'CategoryRecommender'
   recommender = CategoryRecommender.new(current_user, inventory)
   recommend_items = recommender.recommend_items
 when 'SimilarUsers'
-  item_ids = current_user.purchased_items.map(&:id)
-  similar_users = User.similar_purchase_users(item_ids)
+  similar_users = current_user.similar_purchase_users
 
   recommender = SimilarUsers.new(current_user, similar_users)
   recommend_items = recommender.recommend_items
