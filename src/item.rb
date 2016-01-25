@@ -6,9 +6,6 @@ class Item
   extend DB
 
   attr_accessor :id, :name
-
-  # Many-to-many relationship with Category class.
-  # categories: [Category1, Category2, CategoryN]
   attr_reader :categories
 
   def initialize(id, name)

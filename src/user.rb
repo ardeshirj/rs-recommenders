@@ -4,10 +4,8 @@ require_relative './item.rb'
 # User information including purchase history
 class User
   extend DB
+  
   attr_accessor :id, :name
-
-  # Many-to-many relationship with Item class.
-  # purchased_items: [Item1, Item2, ItemN]
   attr_reader :purchased_items
 
   def initialize(id, name)
@@ -32,7 +30,6 @@ class User
     @id == other.id
   end
 
-  # Refer to the same hash key
   def eql?(other)
     @id == other.id
   end
