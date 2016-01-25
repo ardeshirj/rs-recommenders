@@ -24,4 +24,4 @@ else
   puts 'Unknown recommendation strategy'
 end
 
-ap recommend_items
+recommend_items
