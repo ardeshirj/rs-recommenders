@@ -16,6 +16,7 @@ class User
 
   def self.find_user(user_id)
     row = DB.find_user(user_id)
+    fail ArgumentError if row.nil?
     User.new(row[0].to_i, row[1])
   end
 

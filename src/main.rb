@@ -1,31 +1,47 @@
-require 'awesome_print'
-
 require_relative './user.rb'
 require_relative './category_recommender.rb'
 require_relative './similar_users.rb'
-require_relative './db.rb'
 
-extend DB
+if ARGV.empty? || ARGV.size < 2
+  puts 'Usage: main.rb use_id strategy'
+  puts 'Strategies - Enter a number:'
+  puts "\t [0]: Category Recommender"
+  puts "\t [1]: Similar Users"
+  exit
+end
 
-user_id = 35_914
-current_user = User.find_user(user_id)
+user = nil
+strategy = nil
+strategies = %w(
+  CategoryRecommender
+  SimilarUsers
+)
 
-recommendation_strategy = 'SimilarUsers'
+begin
+  user = User.find_user(ARGV[0].to_i)
+  strategy = strategies.fetch(ARGV[1].to_i)
+rescue ArgumentError
+  puts 'No user found!'
+  exit
+rescue IndexError
+  puts 'Not a valid Strategy numeric value '
+  exit
+end
 
 recommend_items = nil
-case recommendation_strategy
+case strategy
 when 'CategoryRecommender'
   inventory = Item.find_all_items
 
-  recommender = CategoryRecommender.new(current_user, inventory)
+  recommender = CategoryRecommender.new(user, inventory)
   recommend_items = recommender.recommend_items
 when 'SimilarUsers'
-  similar_users = current_user.similar_purchase_users
+  similar_users = user.similar_purchase_users
 
-  recommender = SimilarUsers.new(current_user, similar_users)
+  recommender = SimilarUsers.new(user, similar_users)
   recommend_items = recommender.recommend_items
 else
-  puts 'Unknown recommendation strategy'
+  fail 'Unknown strategy'
 end
 
-ap recommend_items
+recommend_items.each { |item| puts item.name }
