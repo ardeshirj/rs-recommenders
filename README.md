@@ -22,5 +22,5 @@ ruby src/main.rb use_id strategy
 Run spec files
 ```shell
 rspec spec/
-# checkout the repot at `coverage/index.html`
+# checkout the report at `coverage/index.html`
 ```
