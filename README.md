@@ -1,5 +1,6 @@
 # RS-Recommenders
 
+## Setup
 Run the bundle to install the gems from `Gemfile`:
 ```shell
 bundle install
@@ -11,14 +12,15 @@ from the parent directory
 sqlite3 rs-db < create-db.sql
 ```
 
-To run the `main.rb` from src file
+## Run
+Run main file
 ```shell
 ruby src/main.rb use_id strategy
 # where user_id and strategy are program arguments
 ```
 
-To run the tests and checkout the test coverage
+Run spec files
 ```shell
 rspec spec/
+# checkout the repot at `coverage/index.html`
 ```
-There should be a `coverage` directory with `index.html`
