@@ -1,4 +1,5 @@
 # RS-Recommenders
+Interview project from Retention Science. The raw data has been provided by Retention Science.
 
 ## Setup
 Run the bundle to install the gems from `Gemfile`:
