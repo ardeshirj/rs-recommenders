@@ -1,10 +1,6 @@
 require 'rspec/core/rake_task'
 
-task default: %w(create_db spec)
-
-task :create_db do
-  sh 'sqlite3 rs-db < create-db.sql'
-end
+task default: %w(spec)
 
 RSpec::Core::RakeTask.new(:spec) do |t|
   t.pattern = 'spec'
