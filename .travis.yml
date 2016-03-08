@@ -3,11 +3,8 @@ language: ruby
 rvm:
   - "2.2.4"
 
-services:
-  - sqlite3
-
 env:
   - DB=sqlite
 
 before_script:
-  - sqlite3 rs-db < create-db.sql
+  - sh "sqlite3 rs-db < create-db.sql"
