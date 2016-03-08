@@ -3,7 +3,6 @@ require 'rspec/core/rake_task'
 task default: %w(create_db spec)
 
 task :create_db do
-  sh 'rm rs-db'
   sh 'sqlite3 rs-db < create-db.sql'
 end
 
