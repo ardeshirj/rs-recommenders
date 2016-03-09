@@ -8,3 +8,6 @@ env:
 
 before_script:
   - sqlite3 rs-db < create-db.sql
+
+notifications:
+  email: false
