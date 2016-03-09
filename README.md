@@ -1,4 +1,7 @@
 # RS-Recommenders
+
+[![Build Status](https://travis-ci.org/ardeshirj/rs-recommenders.svg?branch=master)](https://travis-ci.org/ardeshirj/rs-recommenders)
+
 Interview project from Retention Science. The raw data has been provided by Retention Science.
 
 ## Setup
