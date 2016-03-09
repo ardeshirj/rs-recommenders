@@ -7,4 +7,4 @@ env:
   - DB=sqlite
 
 before_script:
-  - sh "sqlite3 rs-db < create-db.sql"
+  - sqlite3 rs-db < create-db.sql
