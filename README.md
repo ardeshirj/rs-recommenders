@@ -13,7 +13,7 @@ bundle install
 Load the ".csv" files to sqlite3 database run the following command
 from the parent directory
 ```shell
-sqlite3 rs-db < create-db.sql
+sqlite3 rs-data.db < create-db.sql
 ```
 
 ## Run
