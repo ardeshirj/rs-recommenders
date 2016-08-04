@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'user'
 
-describe User do
+RSpec.describe User do
   before :all do
     @user = User.find_user(84_484)
   end

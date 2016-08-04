@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'similar_users'
 
-describe SimilarUsers do
+RSpec.describe SimilarUsers do
   before :all do
     user = User.find_user(35_914)
     # user item_ids = [1253, 1532, 1298, 1314, 1366]

@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'category_recommender'
 
-describe CategoryRecommender do
+RSpec.describe CategoryRecommender do
   before :all do
     user = User.find_user(35_914)
     # user category_ids = [134, 152, 133, 129, 164, 168, 154]

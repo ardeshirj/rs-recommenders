@@ -1,6 +1,7 @@
-require 'spec_helper'
+require 'item'
+require 'user'
 
-describe Item do
+RSpec.describe Item do
   before :all do
     @item = Item.find_item(1_253)
   end
